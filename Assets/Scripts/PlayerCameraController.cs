@@ -1,23 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class CameraController : MonoBehaviour {
+public class PlayerCameraController : NetworkBehaviour
+{
 
-    
-    public GameObject player;
+    private GameObject player;
     private Vector3 offset;
 
     // Use this for initialization
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         offset = transform.position - player.transform.position;
     }
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    private void Update()
+    {
+
+    }
 
 
     //Follow cameras, Procedural Animations, Gathering last known states
