@@ -24,15 +24,15 @@ public class PlayerController : NetworkBehaviour
     // Use this for initialization
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         count = 0;
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+  
         GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pickup");
-       
+
         pickUpCount = pickups.Length;
-        //winText.gameObject.SetActive(false);
         joystick = FindObjectOfType<Joystick>();
         hitSound = GetComponent<AudioSource>();
-        
 
         playerCamera = Instantiate<Camera>(playerCamera);
 
