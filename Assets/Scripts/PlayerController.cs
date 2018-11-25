@@ -9,6 +9,7 @@ public class PlayerController : NetworkBehaviour
     private Rigidbody rb;
     public Text countText;
     public Text winText;
+    public GameObject winTextGO;
     private int count;
     private int pickUpCount;
     private bool isGameOver = false;
@@ -16,7 +17,9 @@ public class PlayerController : NetworkBehaviour
     protected Joystick joystick;
     public AudioSource hitSound;
     public Camera playerCamera;
-    private Vector3 offset;
+    public Text debugText;
+    private int playerCount = 0;
+  
 
     // Use this for initialization
     private void Start()
@@ -24,22 +27,29 @@ public class PlayerController : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         count = 0;
         GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pickup");
+       
         pickUpCount = pickups.Length;
         //winText.gameObject.SetActive(false);
         joystick = FindObjectOfType<Joystick>();
         hitSound = GetComponent<AudioSource>();
-        UpdatePlayerRandomColor(rb);
-        offset = transform.position - rb.transform.position;
+        
 
-        playerCamera = GameObject.Instantiate<Camera>(playerCamera);
-        if (isLocalPlayer)
+        playerCamera = Instantiate<Camera>(playerCamera);
+
+        winTextGO = GameObject.FindGameObjectWithTag("WinText");
+
+         if (isLocalPlayer)
         {
+            UpdatePlayerRandomColor(rb);
+            playerCount++;
+            rb.name = "P" + Guid.NewGuid();
             playerCamera.enabled = true;
         }
         else
         {
             playerCamera.enabled = false;
         }
+  
     }
 
     private void UpdatePlayerRandomColor(Rigidbody rb)
@@ -59,12 +69,15 @@ public class PlayerController : NetworkBehaviour
     //Follow cameras, Procedural Animations, Gathering last known states
     private void LateUpdate()
     {
-        
+        PrintVariables();
     }
 
     //Called after processing physics
     private void FixedUpdate()
     {
+
+      
+
         if (!isGameOver && isLocalPlayer)
         {
             float moveHorizontal = 0;
@@ -82,8 +95,9 @@ public class PlayerController : NetworkBehaviour
 
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical) * speed;
             rb.velocity = movement;
-
+            
         }
+
     }
 
     //Starting to collide
@@ -119,5 +133,21 @@ public class PlayerController : NetworkBehaviour
 
     [Command]
     public void CmdSpawn() {
+
+        
+    }
+
+    private void OnGUI()
+    {
+        
+    }
+
+    private void PrintVariables()
+    {
+        if(rb != null && winTextGO!= null)
+        {
+            winTextGO.GetComponent<Text>().text = "CurrentPlayer: " + rb.name.ToString() + ", IsLocal: " + rb.GetComponent<NetworkIdentity>().isLocalPlayer;
+        }
+
     }
 }

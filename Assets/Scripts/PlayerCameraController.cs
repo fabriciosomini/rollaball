@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerCameraController : NetworkBehaviour
@@ -10,8 +11,11 @@ public class PlayerCameraController : NetworkBehaviour
     // Use this for initialization
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        player = players.FirstOrDefault(p => { return p.GetComponent<NetworkIdentity>().isLocalPlayer; });
+        System.Collections.Generic.List<NetworkIdentity> identities = players.Select(p => p.GetComponent<NetworkIdentity>()).ToList();
         offset = transform.position - player.transform.position;
+
     }
 
     // Update is called once per frame
@@ -24,6 +28,11 @@ public class PlayerCameraController : NetworkBehaviour
     //Follow cameras, Procedural Animations, Gathering last known states
     private void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        if (player != null)
+        {
+            transform.position = player.transform.position + offset;
+        }
     }
+
+
 }

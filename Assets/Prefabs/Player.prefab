@@ -298,6 +298,8 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   playerCamera: {fileID: 20830133594626446, guid: cbcdeaf11bd02494180291b2f55ad577,
     type: 2}
+  debugText: {fileID: 114982448371127148, guid: 3d756c92b5b83a54fa39e7a3ad4a3d75,
+    type: 2}
 --- !u!135 &135828051224137004
 SphereCollider:
   m_ObjectHideFlags: 1
