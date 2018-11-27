@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4570622081379346}
+  - component: {fileID: 114304079012089612}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -249,7 +250,7 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774275393493428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -334,6 +335,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &114304079012089612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067911627942928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ed01e8abcba014794d812b14ad962a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsList: []
 --- !u!114 &114434238719646936
 MonoBehaviour:
   m_ObjectHideFlags: 1

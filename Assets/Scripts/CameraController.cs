@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerCameraController : NetworkBehaviour
+public class CameraController : NetworkBehaviour
 {
 
     private GameObject player;
