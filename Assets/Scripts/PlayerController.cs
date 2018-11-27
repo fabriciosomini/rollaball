@@ -95,7 +95,9 @@ public class PlayerController : NetworkBehaviour
 
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical) * speed;
             rb.velocity = movement;
-            
+
+            //Change player rotation to follow direction
+            this.transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
         }
 
     }
