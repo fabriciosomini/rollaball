@@ -1,20 +1,10 @@
-﻿using System.Linq;
-using UnityEngine;
-using UnityEngine.Networking;
+﻿using UnityEngine;
 
-public class CameraController : NetworkBehaviour
+public class CameraController : MultiplayerBehaviour
 {
-
-    private GameObject player;
-    private Vector3 offset;
-
     // Use this for initialization
     private void Start()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        player = players.FirstOrDefault(p => { return p.GetComponent<NetworkIdentity>().isLocalPlayer; });
-        System.Collections.Generic.List<NetworkIdentity> identities = players.Select(p => p.GetComponent<NetworkIdentity>()).ToList();
-        offset = transform.position - player.transform.position;
 
     }
 
@@ -30,7 +20,9 @@ public class CameraController : NetworkBehaviour
     {
         if (player != null)
         {
-            transform.position = player.transform.position + offset;
+            Vector3 playerPosition = player.transform.position;
+            playerPosition.y = 25;
+            transform.position = playerPosition;// + offset;
         }
     }
 
